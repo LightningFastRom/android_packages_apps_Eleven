@@ -44,10 +44,6 @@
     <!-- Allows Eleven to modify media files on external storage -->
     <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
 
-    <!-- Audio Visualizer Permissions -->
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-
     <!-- Accelerometer feature for shake to play -->
     <uses-feature android:name="android.hardware.sensor.accelerometer" />
 
