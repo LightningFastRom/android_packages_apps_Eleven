@@ -66,7 +66,6 @@ import org.lineageos.eleven.widgets.PlayPauseProgressButton;
 import org.lineageos.eleven.widgets.RepeatButton;
 import org.lineageos.eleven.widgets.RepeatingImageButton;
 import org.lineageos.eleven.widgets.ShuffleButton;
-import org.lineageos.eleven.widgets.VisualizerView;
 
 import java.lang.ref.WeakReference;
 
@@ -126,9 +125,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
     // Total time
     private TextView mTotalTime;
 
-    // Visualizer View
-    private VisualizerView mVisualizerView;
-
     // Broadcast receiver
     private PlaybackStatus mPlaybackStatus;
 
@@ -181,10 +177,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
         initHeaderBar();
 
         initPlaybackControls();
-
-        mVisualizerView = (VisualizerView) mRootView.findViewById(R.id.visualizerView);
-        mVisualizerView.initialize(getActivity());
-        updateVisualizerPowerSaveMode();
 
         mLyricsText = (TextView) mRootView.findViewById(R.id.audio_player_lyrics);
 
@@ -707,27 +699,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
 
             mLyricsText.animate().alpha(1).setDuration(200);
         }
-    }
-
-    public void setVisualizerVisible(boolean visible) {
-        if (visible && PreferenceUtils.getInstance(getActivity()).getShowVisualizer()) {
-            if (PreferenceUtils.canRecordAudio(getActivity())) {
-                mVisualizerView.setVisible(true);
-            } else {
-                PreferenceUtils.requestRecordAudio(getActivity());
-            }
-        } else {
-            mVisualizerView.setVisible(false);
-        }
-    }
-
-    public void updateVisualizerPowerSaveMode() {
-        PowerManager pm = (PowerManager) getActivity().getSystemService(Context.POWER_SERVICE);
-        mVisualizerView.setPowerSaveMode(pm.isPowerSaveMode());
-    }
-
-    public void setVisualizerColor(int color) {
-        mVisualizerView.setColor(color);
     }
 
     /**
