@@ -767,7 +767,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
                 case MusicPlaybackService.PLAYSTATE_CHANGED:
                     // Set the play and pause image
                     audioPlayerFragment.mPlayPauseProgressButton.getPlayPauseButton().updateState();
-                    audioPlayerFragment.mVisualizerView.setPlaying(MusicUtils.isPlaying());
                     break;
                 case MusicPlaybackService.REPEATMODE_CHANGED:
                 case MusicPlaybackService.SHUFFLEMODE_CHANGED:
@@ -786,7 +785,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
                     audioPlayerFragment.onLyrics(intent.getStringExtra("lyrics"));
                     break;
                 case PowerManager.ACTION_POWER_SAVE_MODE_CHANGED:
-                    audioPlayerFragment.updateVisualizerPowerSaveMode();
                     break;
             }
         }
