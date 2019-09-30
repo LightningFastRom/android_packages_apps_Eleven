@@ -78,9 +78,6 @@ public final class PreferenceUtils {
     // show lyrics option
     public static final String SHOW_LYRICS = "show_lyrics";
 
-    // show visualizer flag
-    public static final String SHOW_VISUALIZER = "music_visualization";
-
     // shake to play flag
     public static final String SHAKE_TO_PLAY = "shake_to_play";
 
@@ -348,10 +345,6 @@ public final class PreferenceUtils {
         activity.requestPermissions(
                 new String[] {permission.RECORD_AUDIO},
                 PERMISSION_REQUEST_RECORD_AUDIO);
-    }
-
-    public boolean getShowVisualizer() {
-        return mPreferences.getBoolean(SHOW_VISUALIZER, false);
     }
 
     public boolean getShakeToPlay() {
