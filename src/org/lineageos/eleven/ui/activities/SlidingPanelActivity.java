@@ -64,6 +64,8 @@ public abstract class SlidingPanelActivity extends BaseActivity {
     // this is the blurred image that goes behind the now playing and queue fragments
     private AlbumScrimImage mAlbumScrimImage;
 
+    private boolean mUseBlur;
+
     /**
      * Opens the now playing screen
      */
@@ -98,6 +100,8 @@ public abstract class SlidingPanelActivity extends BaseActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mUseBlur = PreferenceUtils.getInstance(this).getUseBlur();
+
         mTargetNavigatePanel = Panel.None;
 
         setupFirstPanel();
@@ -192,6 +196,12 @@ public abstract class SlidingPanelActivity extends BaseActivity {
 
     @Override protected void onResume() {
         super.onResume();
+
+        // recreate activity if blur preference has changed to apply changes
+        final boolean useBlur = PreferenceUtils.getInstance(this).getUseBlur();
+        if (mUseBlur != useBlur) {
+            recreate();
+        }
     }
 
     /**
