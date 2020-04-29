@@ -135,14 +135,6 @@ public class SettingsActivity extends AppCompatActivity {
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             final Activity activity = getActivity();
             switch (key) {
-                case PreferenceUtils.SHOW_VISUALIZER: {
-                    final boolean showVisualizer = sharedPreferences.getBoolean(key, false);
-                    if (showVisualizer && activity != null &&
-                            !PreferenceUtils.canRecordAudio(activity)) {
-                        PreferenceUtils.requestRecordAudio(activity);
-                    }
-                    break;
-                }
                 case PreferenceUtils.USE_BLUR: {
                     final boolean useBlur = sharedPreferences.getBoolean(key, false);
                     if (activity != null) {

@@ -66,7 +66,6 @@ import org.lineageos.eleven.utils.PreferenceUtils;
 import org.lineageos.eleven.widgets.LoadingEmptyContainer;
 import org.lineageos.eleven.widgets.MainPlaybackControls;
 import org.lineageos.eleven.widgets.NoResultsContainer;
-import org.lineageos.eleven.widgets.VisualizerView;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -94,9 +93,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
     // Album art ListView
     private ViewPager mAlbumArtViewPager;
     private LoadingEmptyContainer mQueueEmpty;
-
-    // Visualizer View
-    private VisualizerView mVisualizerView;
 
     private MainPlaybackControls mMainPlaybackControls;
 
@@ -143,10 +139,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
 
         initHeaderBar();
         initPlaybackControls();
-
-        mVisualizerView = mRootView.findViewById(R.id.visualizerView);
-        mVisualizerView.initialize(getActivity());
-        updateVisualizerPowerSaveMode();
 
         mLyricsText = mRootView.findViewById(R.id.audio_player_lyrics);
 
@@ -501,32 +493,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
         }
     }
 
-    public void setVisualizerVisible(boolean visible) {
-        final FragmentActivity activity = getActivity();
-        if (visible && activity != null &&
-                PreferenceUtils.getInstance(activity).getShowVisualizer()) {
-            if (PreferenceUtils.canRecordAudio(activity)) {
-                mVisualizerView.setVisible(true);
-            } else {
-                PreferenceUtils.requestRecordAudio(activity);
-            }
-        } else {
-            mVisualizerView.setVisible(false);
-        }
-    }
-
-    public void updateVisualizerPowerSaveMode() {
-        final FragmentActivity activity = getActivity();
-        if (activity != null) {
-            PowerManager pm = activity.getSystemService(PowerManager.class);
-            mVisualizerView.setPowerSaveMode(pm.isPowerSaveMode());
-        }
-    }
-
-    public void setVisualizerColor(int color) {
-        mVisualizerView.setColor(color);
-    }
-
     /**
      * Used to update the current time string
      */
@@ -578,17 +544,18 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
                     mReference.get().createAndSetAdapter();
                 }
 
-                // Current info
-                audioPlayerFragment.updateNowPlayingInfo();
-            } else if (MusicPlaybackService.PLAYSTATE_CHANGED.equals(action)) {
-                audioPlayerFragment.mMainPlaybackControls.updatePlayPauseState();
-                audioPlayerFragment.mVisualizerView.setPlaying(MusicUtils.isPlaying());
-            } else if (MusicPlaybackService.REPEATMODE_CHANGED.equals(action) ||
-                    MusicPlaybackService.SHUFFLEMODE_CHANGED.equals(action)) {
-                // Set the repeat image
-                audioPlayerFragment.mMainPlaybackControls.updateRepeatState();
-                // Set the shuffle image
-                audioPlayerFragment.mMainPlaybackControls.updateShuffleState();
+                    // Current info
+                    audioPlayerFragment.updateNowPlayingInfo();
+                    break;
+                case MusicPlaybackService.PLAYSTATE_CHANGED:
+                    audioPlayerFragment.mMainPlaybackControls.updatePlayPauseState();
+                    break;
+                case MusicPlaybackService.REPEATMODE_CHANGED:
+                case MusicPlaybackService.SHUFFLEMODE_CHANGED:
+                    // Set the repeat image
+                    audioPlayerFragment.mMainPlaybackControls.updateRepeatState();
+                    // Set the shuffle image
+                    audioPlayerFragment.mMainPlaybackControls.updateShuffleState();
 
                 // Update the queue
                 audioPlayerFragment.createAndSetAdapter();
@@ -597,8 +564,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
                 audioPlayerFragment.createAndSetAdapter();
             } else if (MusicPlaybackService.NEW_LYRICS.equals(action)) {
                 audioPlayerFragment.onLyrics(intent.getStringExtra("lyrics"));
-            } else if (PowerManager.ACTION_POWER_SAVE_MODE_CHANGED.equals(action)) {
-                audioPlayerFragment.updateVisualizerPowerSaveMode();
             }
         }
     }

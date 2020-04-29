@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2012 Andrew Neal
   Copyright (C) 2014 The CyanogenMod Project
   Copyright (C) 2017-2020 The LineageOS Project
@@ -16,15 +15,9 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.preference.PreferenceCategory android:title="@string/settings_general_category" >
-
-        <!-- Music visualizer -->
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="music_visualization"
-            android:title="@string/settings_show_music_visualization_title" />
+    <androidx.preference.PreferenceCategory android:title="@string/settings_general_category">
 
         <!-- Use blur -->
         <androidx.preference.SwitchPreference
@@ -43,7 +36,7 @@
             android:defaultValue="false"
             android:key="shake_to_play"
             android:title="@string/settings_shake_to_play"
-            android:summary="@string/settings_shake_to_play_summary"/>
+            android:summary="@string/settings_shake_to_play_summary" />
 
     </androidx.preference.PreferenceCategory>
 
