@@ -323,9 +323,6 @@ public abstract class BaseActivity extends AppCompatActivity implements ServiceC
 
     protected void clearMetaInfo() {
         mAlbumArt.setImageResource(R.drawable.default_artwork);
-
-        // view to show if queue is empty
-        mArtistName.setText(R.string.empty_queue_main);
     }
 
     /**
