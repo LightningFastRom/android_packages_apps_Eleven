@@ -197,7 +197,6 @@ public class ImageFetcher extends ImageWorker {
      * @param albumId    The ID of the current album
      * @param artistName The album artist in case we should have to download
      *                   missing artwork
-     * @param smallArtwork Get the small version of the default artwork if no artwork exists
      * @return The album art as an {@link Bitmap}
      */
     public BitmapWithColors getArtwork(final String albumName, final long albumId,
@@ -208,8 +207,7 @@ public class ImageFetcher extends ImageWorker {
             return new BitmapWithColors(artwork, key.hashCode());
         }
 
-        return LetterTileDrawable.createDefaultBitmap(mContext, key, ImageType.ALBUM, false,
-                smallArtwork);
+        return LetterTileDrawable.createDefaultBitmap(mContext, key, ImageType.ALBUM, false);
     }
 
     public Bitmap getArtworkBitmap(final String albumName, final long albumId) {

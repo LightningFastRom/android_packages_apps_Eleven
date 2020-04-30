@@ -25,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/default_artwork"
-        android:scaleType="fitCenter" />
+        android:cropToPadding="false"
+        android:scaleType="fitXY" />
 
 </org.lineageos.eleven.widgets.SquareView>

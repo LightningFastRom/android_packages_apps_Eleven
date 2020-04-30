@@ -27,9 +27,11 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
 import org.lineageos.eleven.R;
@@ -54,11 +56,8 @@ public class LetterTileDrawable extends Drawable {
     private static int sTileFontColor;
     private static float sLetterToTileRatio;
     private static Bitmap DEFAULT_ARTIST;
-    private static Bitmap DEFAULT_ARTIST_LARGE;
     private static Bitmap DEFAULT_ALBUM;
-    private static Bitmap DEFAULT_ALBUM_LARGE;
     private static Bitmap DEFAULT_PLAYLIST;
-    private static Bitmap DEFAULT_PLAYLIST_LARGE;
 
     /** Reusable components to avoid new allocations */
     private static final Paint sPaint = new Paint();
@@ -82,12 +81,9 @@ public class LetterTileDrawable extends Drawable {
             sDefaultColor = ContextCompat.getColor(context, R.color.letter_tile_default_color);
             sTileFontColor = ContextCompat.getColor(context, R.color.letter_tile_font_color);
             sLetterToTileRatio = res.getFraction(R.fraction.letter_to_tile_ratio, 1, 1);
-            DEFAULT_ARTIST = BitmapFactory.decodeResource(res, R.drawable.ic_artist);
-            DEFAULT_ARTIST_LARGE = BitmapFactory.decodeResource(res, R.drawable.ic_artist_lg);
-            DEFAULT_ALBUM = BitmapFactory.decodeResource(res, R.drawable.ic_album);
-            DEFAULT_ALBUM_LARGE = BitmapFactory.decodeResource(res, R.drawable.ic_album_lg);
-            DEFAULT_PLAYLIST = BitmapFactory.decodeResource(res, R.drawable.ic_playlist);
-            DEFAULT_PLAYLIST_LARGE = BitmapFactory.decodeResource(res, R.drawable.ic_playlist_lg);
+            DEFAULT_ARTIST = convertDrawableToBitmap(AppCompatResources.getDrawable(context,R.drawable.ic_artist));
+            DEFAULT_ALBUM = convertDrawableToBitmap(AppCompatResources.getDrawable(context,R.drawable.ic_album));
+            DEFAULT_PLAYLIST = convertDrawableToBitmap(AppCompatResources.getDrawable(context,R.drawable.ic_playlist));
 
             sPaint.setTypeface(Typeface.create(
                     res.getString(R.string.letter_tile_letter_font_family), Typeface.NORMAL));
@@ -161,7 +157,7 @@ public class LetterTileDrawable extends Drawable {
                     sPaint);
         } else {
             // Draw the default image if there is no letter/digit to be drawn
-            final Bitmap bitmap = getDefaultBitmapForImageType(mImageType, bounds);
+            final Bitmap bitmap = getDefaultBitmap(mImageType);
 
             // The bitmap should be drawn in the middle of the canvas without changing its width to
             // height ratio.
@@ -212,26 +208,17 @@ public class LetterTileDrawable extends Drawable {
     }
 
     /**
-     * Gets the default image to show for the image type.  If the bounds are large,
-     * it will use the large default bitmap
+     * Gets the default image to show for the image type.
      */
-    private static Bitmap getDefaultBitmapForImageType(ImageType type, Rect bounds) {
-        Bitmap ret = getDefaultBitmap(type, true);
-        if (Math.max(bounds.width(), bounds.height()) > Math.max(ret.getWidth(), ret.getHeight())) {
-            ret = getDefaultBitmap(type, false);
-        }
 
-        return ret;
-    }
-
-    private static Bitmap getDefaultBitmap(ImageType type, boolean small) {
+    private static Bitmap getDefaultBitmap(ImageType type) {
         switch (type) {
             case ARTIST:
-                return small ? DEFAULT_ARTIST : DEFAULT_ARTIST_LARGE;
+                return DEFAULT_ARTIST;
             case ALBUM:
-                return small ? DEFAULT_ALBUM : DEFAULT_ALBUM_LARGE;
+                return DEFAULT_ALBUM;
              case PLAYLIST:
-                 return small ? DEFAULT_PLAYLIST : DEFAULT_PLAYLIST_LARGE;
+                 return DEFAULT_PLAYLIST;
             default:
                 throw new IllegalArgumentException("Unrecognized image type");
         }
@@ -323,6 +310,30 @@ public class LetterTileDrawable extends Drawable {
         canvas.drawBitmap(bitmap, sRect, destRect, paint);
     }
 
+
+
+    public static Bitmap convertDrawableToBitmap(Drawable drawable) {
+        if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable) drawable).getBitmap();
+        }
+
+        // We ask for the bounds if they have been set as they would be most
+        // correct, then we check we are  > 0
+        final int width = !drawable.getBounds().isEmpty() ?
+                drawable.getBounds().width() : drawable.getIntrinsicWidth();
+
+        final int height = !drawable.getBounds().isEmpty() ?
+                drawable.getBounds().height() : drawable.getIntrinsicHeight();
+
+        // Now we check we are > 0
+        final Bitmap bitmap = Bitmap.createBitmap(width <= 0 ? 1 : width, height <= 0 ? 1 : height,
+                Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+
+        return bitmap;
+    }
     /**
      * Draws the default letter tile drawable for the image type to a bitmap
      * @param identifier the identifier used to determine the color of the background.  For
@@ -330,17 +341,16 @@ public class LetterTileDrawable extends Drawable {
      *                   playlistId
      * @param type the type of item that this tile drawable corresponds to
      * @param isCircle whether to draw a circle or a square
-     * @param smallArtwork true if you want to draw a smaller version of the default bitmap for
      *                     perf/memory reasons
      */
     public static BitmapWithColors createDefaultBitmap(Context context, String identifier,
-            ImageType type, boolean isCircle, boolean smallArtwork) {
+            ImageType type, boolean isCircle) {
         initializeStaticVariables(context);
 
         identifier = MusicUtils.getTrimmedName(identifier);
 
         // get the default bitmap to determine what to draw to
-        Bitmap defaultBitmap = getDefaultBitmap(type, smallArtwork);
+        Bitmap defaultBitmap = getDefaultBitmap(type);
         final Rect bounds = new Rect(0, 0, defaultBitmap.getWidth(), defaultBitmap.getHeight());
 
         // create a bitmap and canvas for drawing
