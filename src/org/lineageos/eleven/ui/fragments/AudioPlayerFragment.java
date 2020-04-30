@@ -430,7 +430,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
         if(queueSize == 0) {
             // view to show if queue is empty
             mSongTitle.setText(R.string.empty_queue_main);
-            mAlbumArtViewPager.setBackground(R.drawable.default_artwork);
         } else {
             mQueueEmpty.hideAll();
         }
