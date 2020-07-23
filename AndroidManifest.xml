@@ -52,10 +52,6 @@
     <!-- Allows Eleven to modify media files on external storage -->
     <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
 
-    <!-- Audio Visualizer Permissions -->
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-
     <!-- Allows Eleven to start services in foreground -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
