@@ -115,7 +115,8 @@
     <!-- Audio player Buttons (play/pause/shuffle/repeat/next/previous)-->
     <dimen name="audio_player_controls_end_button_width">36.0dip</dimen>
     <dimen name="audio_player_controls_end_button_height">36.0dip</dimen>
-    <dimen name="audio_player_controls_end_button_margin">18.0dip</dimen>
+    <dimen name="audio_player_controls_end_button_margin">16.0dip</dimen>
+	<dimen name="audio_player_controls_top_margin">3.0dip</dimen>
     <dimen name="audio_player_controls_main_button_width">100.0dip</dimen>
     <dimen name="audio_player_controls_main_button_height">100.0dip</dimen>
     <dimen name="audio_player_controls_top_button_width">26.0dip</dimen>

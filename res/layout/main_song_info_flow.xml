@@ -58,19 +58,7 @@
 			android:textSize="@dimen/text_size_micro"
 			tools:text="Name of Artist" 
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/main_info_flow_song_title"
-			app:layout_constraintEnd_toEndOf="parent" 
-			app:layout_constraintBottom_toTopOf="@+id/spacer" />
-			
-		<Space
-			android:id="@+id/spacer"
-        	android:layout_width="0dp" 
-			android:layout_height="match_parent"
-			android:layout_gravity="fill" 
-			android:gravity="bottom" 
-			app:layout_constraintTop_toBottomOf="@+id/main_info_flow_song_title"
-        	app:layout_constraintEnd_toEndOf="parent"
-        	app:layout_constraintStart_toStartOf="parent"
-        	app:layout_constraintBottom_toBottomOf="parent" />
+        	app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

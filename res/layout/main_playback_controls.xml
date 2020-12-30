@@ -23,123 +23,150 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:background="@color/blue_dark"
-    tools:layout_height="match_parent"
 	android:theme="@style/RestrictDarkMode">
 
-    <TextView
-        android:id="@+id/audio_player_current_time"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+	    android:id="@+id/audio_player_seeker_root"
+		android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:gravity="center_vertical"
-        android:paddingEnd="16dp"
-        android:paddingStart="16dp"
-        android:textColor="@color/audio_player_current_time_color"
-        android:textSize="@dimen/audio_player_time_text_size"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/audio_player_seeker"
+		android:layout_marginTop="@dimen/audio_player_controls_top_margin"
+		app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/main_playback_control"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/audio_player_seeker"
-        tools:text="00:03" />
+		app:layout_constraintEnd_toEndOf="parent">
 
-    <androidx.appcompat.widget.AppCompatSeekBar
-        android:id="@+id/audio_player_seeker"
-        style="?android:attr/seekBarStyle"
-        android:layout_width="0dp"
+		<TextView
+			android:id="@+id/audio_player_current_time"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_centerVertical="true"
+			android:gravity="center_vertical"
+			android:paddingEnd="8dp"
+			android:paddingStart="16dp"
+			android:textColor="@color/audio_player_current_time_color"
+			android:textSize="@dimen/audio_player_time_text_size"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+		    app:layout_constraintBottom_toBottomOf="parent" 
+			android:textStyle="bold"
+			tools:text="00:03" />
+	
+		<androidx.appcompat.widget.AppCompatSeekBar
+			android:id="@+id/audio_player_seeker"
+			style="?android:attr/seekBarStyle"
+			android:layout_width="0dp"
+			android:layout_height="@dimen/audio_player_controls_end_button_height"
+			android:layout_marginLeft="4dp"
+			android:layout_marginRight="4dp"
+			android:progressBackgroundTint="@color/audio_player_seeker_progress_background_color"
+			android:progressTint="@color/audio_player_seeker_progress_color"
+			android:thumbTint="@color/audio_player_seeker_thumb_color"
+			app:layout_constraintEnd_toStartOf="@+id/audio_player_total_time"
+			app:layout_constraintStart_toEndOf="@+id/audio_player_current_time"
+			app:layout_constraintTop_toTopOf="parent"
+		    app:layout_constraintBottom_toBottomOf="parent" 
+			tools:progress="20" />
+	
+		<TextView
+			android:id="@+id/audio_player_total_time"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_centerVertical="true"
+			android:gravity="center_vertical"
+			android:paddingEnd="16dp"
+			android:paddingStart="8dp"
+			android:textColor="@color/audio_player_total_time_color"
+			android:textSize="@dimen/audio_player_time_text_size"
+			android:textStyle="bold"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+		    app:layout_constraintBottom_toBottomOf="parent" 
+			tools:text="12:53" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+	    android:id="@+id/main_playback_control"
+		android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:progressBackgroundTint="@color/audio_player_seeker_progress_background_color"
-        android:progressTint="@color/audio_player_seeker_progress_color"
-        android:thumbTint="@color/audio_player_seeker_thumb_color"
-        app:layout_constraintEnd_toStartOf="@+id/audio_player_total_time"
-        app:layout_constraintStart_toEndOf="@+id/audio_player_current_time"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:progress="20" />
+		android:layout_marginTop="@dimen/audio_player_controls_top_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toEndOf="parent">
 
-    <TextView
-        android:id="@+id/audio_player_total_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:gravity="center_vertical"
-        android:paddingEnd="16dp"
-        android:paddingStart="16dp"
-        android:textColor="@color/audio_player_total_time_color"
-        android:textSize="@dimen/audio_player_time_text_size"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/audio_player_seeker"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/audio_player_seeker"
-        tools:text="12:53" />
+		<org.lineageos.eleven.widgets.ShuffleButton
+			android:id="@+id/action_button_shuffle"
+			android:layout_width="@dimen/audio_player_controls_end_button_width"
+			android:layout_height="@dimen/audio_player_controls_end_button_height"
+			android:layout_marginLeft="@dimen/audio_player_controls_end_button_margin"
+			android:layout_marginRight="@dimen/audio_player_controls_end_button_margin"
+			android:contentDescription="@string/accessibility_shuffle"
+			android:foreground="?android:selectableItemBackgroundBorderless"
+			android:scaleType="centerCrop"
+			android:src="@drawable/btn_playback_shuffle_all"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+		    app:layout_constraintBottom_toBottomOf="parent"/>
+	
+		<org.lineageos.eleven.widgets.RepeatingImageButton
+			android:id="@+id/action_button_previous"
+			android:layout_width="@dimen/audio_player_controls_end_button_width"
+			android:layout_height="@dimen/audio_player_controls_end_button_height"
+			android:layout_marginLeft="@dimen/audio_player_controls_end_button_margin"
+			android:layout_marginRight="@dimen/audio_player_controls_end_button_margin"
+			android:foreground="?android:selectableItemBackgroundBorderless"
+			android:scaleType="centerCrop"
+			android:src="@drawable/btn_playback_previous" 
+			app:layout_constraintEnd_toStartOf="@+id/playPauseButton"
+			app:layout_constraintTop_toTopOf="parent"
+		    app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintStart_toEndOf="@+id/action_button_shuffle"/>
 
-    <org.lineageos.eleven.widgets.ShuffleButton
-        android:id="@+id/action_button_shuffle"
-        android:layout_width="@dimen/audio_player_controls_end_button_width"
-        android:layout_height="@dimen/audio_player_controls_end_button_height"
-        android:layout_margin="@dimen/audio_player_controls_end_button_margin"
-        android:contentDescription="@string/accessibility_shuffle"
-        android:foreground="?android:selectableItemBackgroundBorderless"
-        android:scaleType="fitCenter"
-        android:src="@drawable/btn_playback_shuffle_all"
-        app:layout_constraintBottom_toBottomOf="@+id/action_button_previous"
-        app:layout_constraintEnd_toStartOf="@+id/action_button_previous"
-        app:layout_constraintTop_toTopOf="@+id/action_button_previous" />
+	    <org.lineageos.eleven.widgets.PlayPauseButton
+            android:id="@+id/playPauseButton"
+            android:layout_width="@dimen/audio_player_controls_end_button_width"
+            android:layout_height="@dimen/audio_player_controls_end_button_height"
+			android:layout_marginLeft="@dimen/audio_player_controls_end_button_margin"
+			android:layout_marginRight="@dimen/audio_player_controls_end_button_margin"
+            android:background="@color/white"
+            android:contentDescription="@string/accessibility_play"
+            android:focusable="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/btn_playback_play" 
+			app:layout_constraintStart_toEndOf="@+id/action_button_previous"
+			app:layout_constraintEnd_toStartOf="@+id/action_button_next"
+			app:layout_constraintTop_toTopOf="parent"
+		    app:layout_constraintBottom_toBottomOf="parent"/>
+	
+		<org.lineageos.eleven.widgets.RepeatingImageButton
+			android:id="@+id/action_button_next"
+			android:layout_width="@dimen/audio_player_controls_end_button_width"
+			android:layout_height="@dimen/audio_player_controls_end_button_height"
+			android:layout_marginLeft="@dimen/audio_player_controls_end_button_margin"
+			android:layout_marginRight="@dimen/audio_player_controls_end_button_margin"
+			android:foreground="?android:selectableItemBackgroundBorderless"
+			android:scaleType="centerCrop"
+			android:src="@drawable/btn_playback_next"
+			app:layout_constraintStart_toEndOf="@+id/playPauseButton"
+			app:layout_constraintEnd_toStartOf="@+id/action_button_repeat"
+			app:layout_constraintTop_toTopOf="parent"
+		    app:layout_constraintBottom_toBottomOf="parent"/>
+	
+		<org.lineageos.eleven.widgets.RepeatButton
+			android:id="@+id/action_button_repeat"
+			android:layout_width="@dimen/audio_player_controls_end_button_width"
+			android:layout_height="@dimen/audio_player_controls_end_button_height"
+			android:layout_marginLeft="@dimen/audio_player_controls_end_button_margin"
+			android:layout_marginRight="@dimen/audio_player_controls_end_button_margin"
+			android:contentDescription="@string/accessibility_repeat"
+			android:focusable="true"
+			android:foreground="?android:selectableItemBackgroundBorderless"
+			android:scaleType="centerCrop"
+			android:src="@drawable/btn_playback_repeat_all"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+		    app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <org.lineageos.eleven.widgets.RepeatingImageButton
-        android:id="@+id/action_button_previous"
-        android:layout_width="@dimen/audio_player_controls_end_button_width"
-        android:layout_height="@dimen/audio_player_controls_end_button_height"
-        android:layout_margin="@dimen/audio_player_controls_end_button_margin"
-        android:foreground="?android:selectableItemBackgroundBorderless"
-        android:scaleType="fitCenter"
-        android:src="@drawable/btn_playback_previous"
-        app:layout_constraintBottom_toBottomOf="@+id/playPauseProgressButton"
-        app:layout_constraintEnd_toStartOf="@+id/playPauseProgressButton"
-        app:layout_constraintTop_toTopOf="@+id/playPauseProgressButton" />
-
-    <include
-        android:id="@+id/playPauseProgressButton"
-        layout="@layout/play_pause_progress_button"
-        android:layout_width="@dimen/audio_player_controls_main_button_width"
-        android:layout_height="@dimen/audio_player_controls_main_button_height"
-        android:layout_centerInParent="true"
-        android:layout_margin="8dp"
-        android:contentDescription="@string/accessibility_play"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/audio_player_seeker" />
-
-    <org.lineageos.eleven.widgets.RepeatingImageButton
-        android:id="@+id/action_button_next"
-        android:layout_width="@dimen/audio_player_controls_end_button_width"
-        android:layout_height="@dimen/audio_player_controls_end_button_height"
-        android:layout_margin="@dimen/audio_player_controls_end_button_margin"
-        android:foreground="?android:selectableItemBackgroundBorderless"
-        android:scaleType="fitCenter"
-        android:src="@drawable/btn_playback_next"
-        app:layout_constraintBottom_toBottomOf="@+id/playPauseProgressButton"
-        app:layout_constraintStart_toEndOf="@+id/playPauseProgressButton"
-        app:layout_constraintTop_toTopOf="@+id/playPauseProgressButton" />
-
-    <org.lineageos.eleven.widgets.RepeatButton
-        android:id="@+id/action_button_repeat"
-        android:layout_width="@dimen/audio_player_controls_end_button_width"
-        android:layout_height="@dimen/audio_player_controls_end_button_height"
-        android:layout_margin="@dimen/audio_player_controls_end_button_margin"
-        android:contentDescription="@string/accessibility_repeat"
-        android:focusable="true"
-        android:foreground="?android:selectableItemBackgroundBorderless"
-        android:scaleType="fitCenter"
-        android:src="@drawable/btn_playback_repeat_all"
-        app:layout_constraintBottom_toBottomOf="@+id/action_button_next"
-        app:layout_constraintStart_toEndOf="@+id/action_button_next"
-        app:layout_constraintTop_toTopOf="@+id/action_button_next" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
-
+	</androidx.constraintlayout.widget.ConstraintLayout>
+	
 </androidx.constraintlayout.widget.ConstraintLayout>

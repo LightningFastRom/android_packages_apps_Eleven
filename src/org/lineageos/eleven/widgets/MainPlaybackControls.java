@@ -39,7 +39,7 @@ public class MainPlaybackControls extends FrameLayout {
 
     private final ShuffleButton mShuffleButton;
     private final RepeatingImageButton mPreviousButton;
-    private final PlayPauseButtonContainer mPlayPauseButtonContainer;
+    private final PlayPauseButton mPlayPauseButton;
     private final RepeatingImageButton mNextButton;
     private final RepeatButton mRepeatButton;
 
@@ -66,7 +66,7 @@ public class MainPlaybackControls extends FrameLayout {
         mTotalTime = findViewById(R.id.audio_player_total_time);
         mSeeker = findViewById(R.id.audio_player_seeker);
 
-        mPlayPauseButtonContainer = findViewById(R.id.playPauseProgressButton);
+        mPlayPauseButton = findViewById(R.id.playPauseButton);
         mShuffleButton = findViewById(R.id.action_button_shuffle);
         mRepeatButton = findViewById(R.id.action_button_repeat);
         mPreviousButton = findViewById(R.id.action_button_previous);
@@ -78,8 +78,6 @@ public class MainPlaybackControls extends FrameLayout {
                 (v, delta, repeatCount) -> seekRelative(repeatCount, delta, false));
         mNextButton.setRepeatListener(
                 (v, delta, repeatCount) -> seekRelative(repeatCount, delta, true));
-
-        mPlayPauseButtonContainer.enableAndShow();
     }
 
     public void updateNowPlayingInfo() {
@@ -99,7 +97,7 @@ public class MainPlaybackControls extends FrameLayout {
     }
 
     public void updatePlayPauseState() {
-        mPlayPauseButtonContainer.updateState();
+        mPlayPauseButton.updateState();
     }
 
     public void updateShuffleState() {
