@@ -18,13 +18,6 @@
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <androidx.preference.PreferenceCategory android:title="@string/settings_general_category">
-
-        <!-- Use blur -->
-        <androidx.preference.SwitchPreference
-            android:defaultValue="false"
-            android:key="use_blur"
-            android:title="@string/settings_use_blur_title" />
-
         <!-- Show Lyrics -->
         <androidx.preference.SwitchPreference
             android:defaultValue="true"
