@@ -19,7 +19,8 @@
     <!-- Material -->
     <color name="primary">#ffffff</color>
     <color name="primary_dark">#ffffff</color>
-    <color name="accent">#167C80</color>
+    <color name="primary_light">#ffffff</color>
+    <color name="accent">@color/audio_preview_accent_color</color>
 
     <!-- Main colors -->
     <color name="black">#000000</color>
@@ -126,9 +127,6 @@
         <item>@color/letter_tile_deep_orange_color_dark</item>
         <item>@color/letter_tile_brown_color_dark</item>
     </array>
-
-    <!-- Color for the visualizer bars -->
-    <color name="visualizer_fill_color">#bffafafa</color>
 
     <!-- Separated and exposed values for themes -->
     <color name="widget_background_color">@color/white</color>
