@@ -546,12 +546,10 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
 
                     // Current info
                     audioPlayerFragment.updateNowPlayingInfo();
-                    break;
-                case MusicPlaybackService.PLAYSTATE_CHANGED:
+            } else if (MusicPlaybackService.PLAYSTATE_CHANGED.equals(action)) {
                     audioPlayerFragment.mMainPlaybackControls.updatePlayPauseState();
-                    break;
-                case MusicPlaybackService.REPEATMODE_CHANGED:
-                case MusicPlaybackService.SHUFFLEMODE_CHANGED:
+            } else if (MusicPlaybackService.REPEATMODE_CHANGED.equals(action) ||
+                    MusicPlaybackService.SHUFFLEMODE_CHANGED.equals(action)) {
                     // Set the repeat image
                     audioPlayerFragment.mMainPlaybackControls.updateRepeatState();
                     // Set the shuffle image
