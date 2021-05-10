@@ -136,10 +136,6 @@ public class SectionSeparatorItemDecoration extends RecyclerView.ItemDecoration 
     }
 
     private boolean hasLabel(int position) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            return mLabels.contains(position);
-        } else {
-            return mLabels.indexOfKey(position) > -1;
-        }
+        return mLabels.indexOfKey(position) > -1;
     }
 }
