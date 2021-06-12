@@ -79,7 +79,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
     private ViewGroup mRootView;
 
     private Toolbar mPlayerToolBar;
-
+	
     // Header views
     private TextView mSongTitle;
     private TextView mArtistName;
@@ -333,11 +333,12 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
      */
     private void initHeaderBar() {
         mPlayerToolBar = mRootView.findViewById(R.id.audio_player_header);
-
+        
         // Title text
 		mSongTitle = mRootView.findViewById(R.id.main_info_flow_song_title);
         mSongTitle.setSelected(true);
         mArtistName = mRootView.findViewById(R.id.main_info_flow_artist_title);
+		mArtistName.setSelected(true);
     }
 
     /**

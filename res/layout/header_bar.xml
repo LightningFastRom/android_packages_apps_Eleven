@@ -41,12 +41,20 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:ellipsize="end"
-        android:singleLine="true"
+		android:layout_gravity="center_vertical"
+        android:gravity="top"
         android:textAllCaps="true"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_medium"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:ellipsize="marquee"
+        android:fadingEdge="horizontal"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true" />
 
     <ImageView
         android:id="@+id/header_bar_menu_button"

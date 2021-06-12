@@ -35,7 +35,7 @@
         <item name="android:windowAllowReturnTransitionOverlap">false</item>
         <item name="android:navigationBarColor">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:windowLightNavigationBar">true</item>
+		<item name="android:windowBackground">@color/primary</item>
     </style>
 
     <style name="ActionBarWidgetTheme" parent="@style/Theme.AppCompat.DayNight">
