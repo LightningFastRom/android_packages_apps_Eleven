@@ -42,13 +42,31 @@
         android:layout_weight="1"
         android:paddingStart="@dimen/bottom_action_bar_info_padding_left" >
 
-        <TextView
-            android:id="@+id/bottom_action_bar_line_one"
-            style="@style/BottomActionBarLineOne" />
+		<TextView
+	        android:id="@+id/bottom_action_bar_line_one"
+	        style="@style/BottomActionBarLineOne"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            tools:text="Really long and nice album title" />
 
         <TextView
             android:id="@+id/bottom_action_bar_line_two"
             style="@style/BottomActionBarLineTwo"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            tools:text="Name of Artist" 
             android:layout_below="@+id/bottom_action_bar_line_one" />
 
     </RelativeLayout>
