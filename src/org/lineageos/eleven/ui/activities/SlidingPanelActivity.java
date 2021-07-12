@@ -21,6 +21,7 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -81,6 +82,11 @@ public abstract class SlidingPanelActivity extends BaseActivity {
         super.initBottomActionBar();
         // Bottom action bar
         final LinearLayout bottomActionBar = findViewById(R.id.bottom_action_bar);
+        final TextView headerSongTitle = bottomActionBar.findViewById(R.id.bottom_action_bar_line_one);
+        headerSongTitle.setSelected(true);
+        final TextView headerArtistName = bottomActionBar.findViewById(R.id.bottom_action_bar_line_two);
+        headerArtistName.setSelected(true);
+
         // Display the now playing screen or shuffle if this isn't anything
         // playing
         bottomActionBar.setOnClickListener(mOpenNowPlaying);
